@@ -9,5 +9,22 @@
   </head>
   <body>
     <h1>Hello</h1>
+    <p><%= message %></p>
+
+    <% if (soundtrack) { %>
+    <script>
+      const audio = new Audio("<%=soundtrack%>");
+      function playMusic() {
+        audio.play();
+        console.log("Playing music...");
+      }
+      function pauseMusic() {
+        audio.pause();
+        console.log("Music paused...");
+      }
+    </script>
+    <button onclick="playMusic()">Play music</button>
+    <button onclick="pauseMusic()">Pause music</button>
+    <% } %>
   </body>
 </html>
