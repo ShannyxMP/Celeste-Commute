@@ -8,13 +8,16 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Hello</h1>
+    <h1><%= time %></h1>
     <p><%= message %></p>
+
+    <!-- [ ] Add a way to customise time to choose the hourly soundtrack -->
 
     <% if (soundtrack) { %>
     <script>
       const audio = new Audio("<%=soundtrack%>");
       function playMusic() {
+        audio.loop = true;
         audio.play();
         console.log("Playing music...");
       }
