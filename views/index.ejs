@@ -8,26 +8,19 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1><%= time %></h1>
+    <h1>Celestial Study</h1>
+    <h2 id="displayTime"><%= time %></h2>
     <p><%= message %></p>
+
+    <% if (soundtrack) { %>
+    <audio id="audioPlayer" controls loop>
+      <source src="<%= soundtrack %>" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
 
     <!-- [ ] Add a way to customise time to choose the hourly soundtrack -->
 
-    <% if (soundtrack) { %>
-    <script>
-      const audio = new Audio("<%=soundtrack%>");
-      function playMusic() {
-        audio.loop = true;
-        audio.play();
-        console.log("Playing music...");
-      }
-      function pauseMusic() {
-        audio.pause();
-        console.log("Music paused...");
-      }
-    </script>
-    <button onclick="playMusic()">Play music</button>
-    <button onclick="pauseMusic()">Pause music</button>
+    <script src="main.js"></script>
     <% } %>
   </body>
 </html>
