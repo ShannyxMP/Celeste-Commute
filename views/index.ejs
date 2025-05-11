@@ -18,7 +18,23 @@
       Your browser does not support the audio element.
     </audio>
 
-    <!-- [ ] Add a way to customise time to choose the hourly soundtrack -->
+    <!-- [x] Add a way to customise time to choose the hourly soundtrack -->
+    <form action="/set-soundtrack" method="POST">
+      <label for="setTime">Choose a time:</label>
+      <select name="setTime" id="setTime">
+        <% for (let i = 0; i < 24; i++) { %> <% if (i > 0 && i <= 11) { %>
+        <option value="<%= i %>AM"><%= i %>AM</option>
+        <% } else if (i === 12) { %>
+        <option value="<%= i %>PM"><%= i %>PM</option>
+        <% } else if (i > 12 && i < 24) { %> <% let j = i - 12; %>
+        <option value="<%= j %>PM"><%= j %>PM</option>
+        <% } else { %>
+        <option value="12AM">12AM</option>
+        <% } %> <% } %>
+      </select>
+      <input type="submit" />
+      <a href="/">Reset to auto mode</a>
+    </form>
 
     <script src="main.js"></script>
     <% } %>
