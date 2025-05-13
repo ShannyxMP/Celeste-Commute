@@ -1,3 +1,62 @@
 html {
-  background-color: aqua;
+
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.gradient-backgrounds {
+  z-index: -10;
+  width: 200%;
+  height: 400%;
+  position: absolute;
+  left: -50%;
+  bottom: -200%;
+
+  animation: spin 20s linear infinite;
+  transform-origin: center;
+
+  /* ----- Using layered radial gradients ----- */
+  background: radial-gradient(ellipse at bottom, #4677d1 0%, #050849 10%),
+    radial-gradient(
+      ellipse at top,
+      rgba(190, 255, 247, 0.7) 0%,
+      rgba(190, 255, 247, 0) 60%,
+      #050849 70%
+    );
+  background-blend-mode: overlay;
+
+  /* ----- Using a single radial gradient: -----
+  background: radial-gradient(
+    circle at bottom,
+    #befff7 0%,
+    #4677d1 40%,
+    #151965 60%,
+    #0d0d3a 100%
+  );
+  */
+
+  /* ----- Using two divs with different gradients: -----
+  .night-gradient {
+    height: 50%;
+    width: 100%;
+    display: block;
+    background: radial-gradient(ellipse at bottom, #4677d1, #151965);
+  }
+  .day-gradient {
+    height: 50%;
+    width: 100%;
+    display: block;
+    background: radial-gradient(ellipse at top, #4677d1, #befff7);
+  }
+  */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="gradient-backgrounds">
+      <div class="night-gradient"></div>
+      <div class="day-gradient"></div>
+    </div>
+
+    <main>
     <h1>Celestial Study</h1>
     <h2 id="displayTime"><%= time %></h2>
     <p><%= message %></p>
@@ -35,8 +41,9 @@
       <input type="submit" />
       <a href="/">Reset to auto mode</a>
     </form>
+      <% } %>
+    </main>
 
     <script src="main.js"></script>
-    <% } %>
   </body>
 </html>
