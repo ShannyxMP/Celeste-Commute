@@ -1,4 +1,6 @@
 html {
+  background-color: #050849; /* To fill any whitespace */
+}
 
 body {
   height: 100%;
@@ -7,11 +9,11 @@ body {
 
 .gradient-backgrounds {
   z-index: -10;
-  width: 200%;
-  height: 400%;
+  width: 350vw; /* To avoid whitespace as gradient background turns */
+  height: 350vh;
   position: absolute;
-  left: -50%;
-  bottom: -200%;
+  left: -125vw;
+  bottom: -175vh;
 
   animation: spin 20s linear infinite;
   transform-origin: center;
@@ -59,4 +61,26 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes oscillate {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.globe {
+  position: absolute;
+  bottom: -166px; /* Depends on picture size */
+  left: 40%;
+
+  animation: spin 20s linear infinite;
+}
+
+.night.globe {
+  animation: spin 20s linear infinite, oscillate 20s ease-in-out infinite;
 }
