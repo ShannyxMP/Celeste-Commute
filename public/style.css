@@ -3,19 +3,30 @@ html {
 }
 
 body {
-  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* height: 100dvh; 
+  width: 100vw;
   overflow: hidden;
+  position: relative; */
+}
+
+.viewport-wrapper {
+  height: 100dvh; /* Use device-height */
+  width: 100vw;
+  overflow: hidden; /* Ensures nothing inside bleeds out */
+  position: relative;
 }
 
 .gradient-backgrounds {
   z-index: -10;
-  width: 350vw; /* To avoid whitespace as gradient background turns */
-  height: 350vh;
+  width: 3000px; /* To avoid whitespace as gradient background turns */
+  height: 3000px;
   position: absolute;
-  left: -125vw;
-  bottom: -175vh;
+  left: -500px;
+  bottom: -1500px;
 
-  animation: spin 20s linear infinite;
+  animation: spin 60s linear infinite;
   transform-origin: center;
 
   /* ----- Using layered radial gradients ----- */
@@ -54,6 +65,50 @@ body {
   */
 }
 
+#drawing-flex-container {
+  display: flex;
+  justify-content: center;
+}
+
+.drawing {
+  height: 900px;
+  position: absolute;
+  bottom: -550px; /* Depends on picture size */
+}
+
+@keyframes falling-sun {
+  0%,
+  100% {
+    transform: translate(0, -500px);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes rising-moon {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -500px);
+  }
+}
+
+@keyframes rising-stars {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, -500px);
+  }
+  75% {
+    transform: translate(0, -500px);
+  }
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -73,14 +128,53 @@ body {
   }
 }
 
-.globe {
-  position: absolute;
-  bottom: -166px; /* Depends on picture size */
-  left: 40%;
-
-  animation: spin 20s linear infinite;
+@keyframes bop {
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    transform: translate(0, 2px);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(0, 0);
+  }
 }
 
-.night.globe {
-  animation: spin 20s linear infinite, oscillate 20s ease-in-out infinite;
+.rise-sun {
+  animation: falling-sun 60s ease-in-out infinite;
+}
+
+.rise-moon {
+  animation: rising-moon 60s ease-in-out infinite;
+}
+
+.rise-stars {
+  animation: rising-stars 60s ease-in-out infinite;
+}
+
+.cloud-night {
+  animation: oscillate 60s ease-in-out infinite;
+}
+
+.globe-day {
+  animation: spin 60s linear infinite;
+}
+
+.globe-night {
+  /* Night version */
+  animation: spin 60s linear infinite, oscillate 60s ease-in-out infinite;
+}
+
+.car-day {
+  animation: bop 1.5s linear infinite;
+}
+
+.car-night {
+  animation: bop 1.5s linear infinite, oscillate 60s ease-in-out infinite;
 }

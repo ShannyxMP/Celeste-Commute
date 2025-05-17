@@ -8,47 +8,91 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="gradient-backgrounds">
-      <!-- NOTE: May need to remove these divs depending on final gradient used  -->
-      <div class="night-gradient"></div>
-      <div class="day-gradient"></div>
+    <div class="viewport-wrapper">
+      <div class="gradient-backgrounds">
+        <!-- NOTE: May need to remove these divs depending on final gradient used  -->
+        <div class="night-gradient"></div>
+        <div class="day-gradient"></div>
+      </div>
+      <div id="drawing-flex-container">
+        <img
+          class="drawing rise-sun"
+          src="images/Sun.png"
+          alt="drawing of the sun"
+        />
+        <img
+          class="drawing rise-moon"
+          src="images/Moon.png"
+          alt="drawing of the moon"
+        />
+        <img
+          class="drawing rise-stars"
+          src="images/Stars.png"
+          alt="drawing of the stars"
+        />
+        <img
+          class="drawing"
+          src="images/Day-Cloud.png"
+          alt="drawing of cloud in the day"
+        />
+        <img
+          class="drawing cloud-night"
+          src="images/Night-Cloud.png"
+          alt="drawing of cloud in the day"
+        />
+        <img
+          class="drawing globe-day"
+          src="images/Day-Globe.png"
+          alt="drawing of globe in the day"
+        />
+        <img
+          class="drawing globe-night"
+          src="images/Night-Globe.png"
+          alt="drawing of globe in the night"
+        />
+        <img
+          class="drawing car-day"
+          src="images/Day-Car.png"
+          alt="drawing of car in the day"
+        />
+        <img
+          class="drawing car-night"
+          src="images/Night-Car.png"
+          alt="drawing of car in the day"
+        />
+      </div>
+
+      <main>
+        <h1>Celestial Study</h1>
+        <h2 id="displayTime"><%= time %></h2>
+        <p><%= message %></p>
+
+        <% if (soundtrack) { %>
+        <audio id="audioPlayer" controls loop>
+          <source src="<%= soundtrack %>" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+
+        <!-- [x] Add a way to customise time to choose the hourly soundtrack -->
+        <form action="/set-soundtrack" method="POST">
+          <label for="setTime">Choose a time:</label>
+          <select name="setTime" id="setTime">
+            <% for (let i = 0; i < 24; i++) { %> <% if (i > 0 && i <= 11) { %>
+            <option value="<%= i %>AM"><%= i %>AM</option>
+            <% } else if (i === 12) { %>
+            <option value="<%= i %>PM"><%= i %>PM</option>
+            <% } else if (i > 12 && i < 24) { %> <% let j = i - 12; %>
+            <option value="<%= j %>PM"><%= j %>PM</option>
+            <% } else { %>
+            <option value="12AM">12AM</option>
+            <% } %> <% } %>
+          </select>
+          <input type="submit" />
+          <a href="/">Reset to auto mode</a>
+        </form>
+        <% } %>
+      </main>
     </div>
-    <div>
-      <img class="globe" src="pokeball-day.png" alt="pokeball" />
-      <img class="globe night" src="pokeball-night.png" alt="pokeball" />
-    </div>
-
-    <main>
-    <h1>Celestial Study</h1>
-    <h2 id="displayTime"><%= time %></h2>
-    <p><%= message %></p>
-
-    <% if (soundtrack) { %>
-    <audio id="audioPlayer" controls loop>
-      <source src="<%= soundtrack %>" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
-
-    <!-- [x] Add a way to customise time to choose the hourly soundtrack -->
-    <form action="/set-soundtrack" method="POST">
-      <label for="setTime">Choose a time:</label>
-      <select name="setTime" id="setTime">
-        <% for (let i = 0; i < 24; i++) { %> <% if (i > 0 && i <= 11) { %>
-        <option value="<%= i %>AM"><%= i %>AM</option>
-        <% } else if (i === 12) { %>
-        <option value="<%= i %>PM"><%= i %>PM</option>
-        <% } else if (i > 12 && i < 24) { %> <% let j = i - 12; %>
-        <option value="<%= j %>PM"><%= j %>PM</option>
-        <% } else { %>
-        <option value="12AM">12AM</option>
-        <% } %> <% } %>
-      </select>
-      <input type="submit" />
-      <a href="/">Reset to auto mode</a>
-    </form>
-      <% } %>
-    </main>
-
     <script src="main.js"></script>
   </body>
 </html>
