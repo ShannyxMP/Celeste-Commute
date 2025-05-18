@@ -37,3 +37,17 @@ if (!songWasRequested) {
     }
   }, 30000); // To fetch data every 30secs
 }
+
+// To set default volume of audio element:
+var audio = document.querySelector("audio");
+audio.volume = 0.2;
+
+// Event listener for the settings button:
+document.addEventListener("DOMContentLoaded", () => {
+  const settings = document.querySelector("#settings");
+  const form = document.querySelector("#form");
+
+  settings.addEventListener("click", () => {
+    form.classList.toggle("collapsed");
+  });
+});

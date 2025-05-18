@@ -1,5 +1,7 @@
 html {
   background-color: #050849; /* To fill any whitespace */
+  font-family: "Quicksand", sans-serif;
+  color: wheat;
 }
 
 body {
@@ -11,12 +13,22 @@ body {
   position: relative; */
 }
 
+main {
+  z-index: 10;
+}
+
+span {
+  font-size: smaller;
+}
+
 .viewport-wrapper {
   height: 100dvh; /* Use device-height */
   width: 100vw;
   overflow: hidden; /* Ensures nothing inside bleeds out */
   position: relative;
 }
+
+/* ---------- Dedicated to the drawings: ---------- */
 
 .gradient-backgrounds {
   z-index: -10;
@@ -68,6 +80,10 @@ body {
 #drawing-flex-container {
   display: flex;
   justify-content: center;
+}
+
+#drawing-flex-container .drawing {
+  z-index: -10; /* Required so that the drawings do not block user interaction with buttons */
 }
 
 .drawing {
@@ -177,4 +193,133 @@ body {
 
 .car-night {
   animation: bop 1.5s linear infinite, oscillate 60s ease-in-out infinite;
+}
+
+/* ---------- Dedicated to the main text: ---------- */
+/* TODO: Change to a customised audio player */
+audio::-webkit-media-controls-panel {
+  background-color: rgb(245, 222, 179);
+}
+
+#body-visible {
+  padding: 0 20px;
+}
+
+#settings {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background-color: rgba(102, 43, 20, 0);
+  padding: 0;
+  border: 0;
+  height: 16px;
+}
+
+#settings:focus {
+  outline: 2px dashed #b5895d;
+  border-radius: 25px;
+  /* box-shadow: 0 0 0 1px rgba(245, 199, 153, 0.4); */
+}
+
+#form {
+  width: 260px;
+  margin: 0 20px;
+  padding: 20px 20px;
+  background-color: rgb(245, 222, 179);
+  border-radius: 25px;
+  transition: max-height 1s ease-in-out, opacity 1s ease-in-out;
+  max-height: 500px;
+  overflow: hidden;
+  opacity: 1;
+
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#form label {
+  color: black;
+}
+
+#form.collapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-color: #fff5ea;
+  color: #000000;
+  border: 2px dashed hsl(34, 36%, 74%);
+  border-radius: 12px;
+  padding: 0rem 2.5rem 0rem 1rem;
+  font-size: 1rem;
+  font-family: "Quicksand", sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%234c3c29' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+}
+
+select:hover {
+  background-color: #fff0dc;
+  border-color: #e6cbaa;
+}
+
+select:focus {
+  outline: none;
+  border-color: #b5895d;
+  box-shadow: 0 0 0 3px rgba(245, 199, 153, 0.4);
+}
+
+#submit-btn {
+  background-color: #b5895d;
+  border: 2px solid hsla(34, 36%, 74%, 0);
+  border-radius: 12px;
+  padding: 0rem 1rem;
+  color: black;
+  font-size: 1rem;
+  font-family: "Quicksand", sans-serif;
+}
+
+#submit-btn:hover {
+  background-color: #956f49;
+  border: 2px solid hsl(34, 36%, 74%);
+}
+
+#reset-link {
+  background-color: #b5895d;
+  border: 2px solid hsla(34, 36%, 74%, 0);
+  border-radius: 12px;
+  padding: 2px 1rem;
+  color: black;
+  text-decoration: none;
+}
+
+#reset-link:hover {
+  background-color: #956f49;
+  border: 2px solid hsl(34, 36%, 74%);
+}
+
+#credits {
+  position: absolute;
+  bottom: 0px;
+  font-size: xx-small;
+}
+
+#credits a {
+  text-decoration: none;
+  color: #fff0dc;
+  font-size: x-small;
 }
