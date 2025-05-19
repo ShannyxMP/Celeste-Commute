@@ -18,9 +18,9 @@
   <body>
     <div class="viewport-wrapper">
       <div class="gradient-backgrounds">
-        <!-- NOTE: May need to remove these divs depending on final gradient used  -->
+        <!-- For using two divs with different gradients (ARCHIVED):
         <div class="night-gradient"></div>
-        <div class="day-gradient"></div>
+        <div class="day-gradient"></div> -->
       </div>
       <div id="drawing-flex-container">
         <img
@@ -41,44 +41,44 @@
         <img
           class="drawing"
           src="images/Day-Cloud.png"
-          alt="drawing of cloud in the day"
+          alt="drawing of cloud at day"
         />
         <img
           class="drawing cloud-night"
           src="images/Night-Cloud.png"
-          alt="drawing of cloud in the day"
+          alt="drawing of cloud at night"
         />
         <img
           class="drawing globe-day"
           src="images/Day-Globe.png"
-          alt="drawing of globe in the day"
+          alt="drawing of globe at day"
         />
         <img
           class="drawing globe-night"
           src="images/Night-Globe.png"
-          alt="drawing of globe in the night"
+          alt="drawing of globe at night"
         />
         <img
           class="drawing car-day"
           src="images/Day-Car.png"
-          alt="drawing of car in the day"
+          alt="drawing of car at day"
         />
         <img
           class="drawing car-night"
           src="images/Night-Car.png"
-          alt="drawing of car in the day"
+          alt="drawing of car at night"
         />
         <div id="credits">
           <p>
             Developed by
-            <a href="https://github.com/ShannyxMP">ShannyxMP</a>. Not affliated
+            <a href="https://github.com/ShannyxMP">ShannyxMP</a>. Not affiliated
             with Nintendo or Animal Crossing.
           </p>
         </div>
       </div>
 
       <main>
-        <div id="body-visible">
+        <div id="visible-body">
           <h1>Celestial Study, <span id="displayTime"><%= time %></span></h1>
           <p><%= message %></p>
 
@@ -92,21 +92,21 @@
 
         <button id="settings">
           <img src="images/settings-icon.png" alt="settings" />
+          <!-- <a target="_blank" href="https://icons8.com/icon/59996/settings">Settings</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
         </button>
         <div id="form" class="collapsed">
-          <!-- [x] Add a way to customise time to choose the hourly soundtrack -->
           <!-- TODO: Add a way for viewer to listen to other animal crossing games' music -->
           <form action="/set-soundtrack" method="POST">
-            <label for="setTime">Time:</label>
+            <label for="setTime">Time: </label>
             <select name="setTime" id="setTime">
               <% for (let i = 0; i < 24; i++) { %> <% if (i > 0 && i <= 11) { %>
-              <option value="<%= i %>AM"><%= i %>AM</option>
+              <option value="<%= i %> am"><%= i %> am</option>
               <% } else if (i === 12) { %>
-              <option value="<%= i %>PM"><%= i %>PM</option>
+              <option value="<%= i %> pm"><%= i %> pm</option>
               <% } else if (i > 12 && i < 24) { %> <% let j = i - 12; %>
-              <option value="<%= j %>PM"><%= j %>PM</option>
+              <option value="<%= j %> pm"><%= j %> pm</option>
               <% } else { %>
-              <option value="12AM">12AM</option>
+              <option value="12 am">12 am</option>
               <% } %> <% } %>
             </select>
             <input id="submit-btn" type="submit" />

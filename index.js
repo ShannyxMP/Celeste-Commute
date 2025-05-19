@@ -5,10 +5,11 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 const baseURL = "https://ac-api.vercel.app/";
+const gameIndex = 1; // music[gameIndex] = 1 selects the "New Leaf" game soundtrack - array indices map to: 0 = New Horizons, 1 = New Leaf, 2 = City Folk, 3 = GameCube
 
 // Middlewares:
 app.use(express.static("public")); // Handle static files
-app.use(bodyParser.urlencoded()); // Parse incoming form data
+app.use(bodyParser.urlencoded({ extended: true })); // Parse incoming form data
 
 let lastFetchedHour, currentSoundtrack;
 
@@ -26,11 +27,11 @@ async function checkAndUpdateHour() {
   if (hourNow !== lastFetchedHour) {
     try {
       const result = await axios.get(`${baseURL}api/?time=${hourNow}`);
-      currentSoundtrack = result.data.music[1].file; // music[1] selects the "New Leaf" game soundtrack - array indices map to: 0 = New Horizons, 1 = New Leaf, 2 = City Folk, 3 = GameCube
+      currentSoundtrack = result.data.music[gameIndex].file;
       lastFetchedHour = hourNow;
     } catch (error) {
       console.error("API fetch error: ", error.message);
-      currentSoundtrack: null;
+      currentSoundtrack = null;
     }
   }
   // console.log(lastFetchedHour);
@@ -46,7 +47,7 @@ app.get("/", async (req, res) => {
   res.render("index.ejs", {
     message: currentSoundtrack
       ? null
-      : "Unable to retrieve selected sountrack.",
+      : "Unable to retrieve selected soundtrack. Try and refresh the page.",
     soundtrack: currentSoundtrack,
     time:
       requestedSoundtrack && requestedTime ? requestedTime : lastFetchedHour, // If requestedSoundtrack is true and requestedTime (e.g., "1PM", "9AM") is provided, use customTime for the time value passed
@@ -62,7 +63,6 @@ app.get("/current-soundtrack", (req, res) => {
   });
 });
 
-// [x] Handle issue with soundtrack being changed every 30secs due to /current-soundtrack -> setInterval
 app.post("/set-soundtrack", async (req, res) => {
   // Handle incoming request to change hourly soundtrack based on selected time by client
   const selectedTime = req.body.setTime; // Output eg.: 12AM
@@ -71,7 +71,7 @@ app.post("/set-soundtrack", async (req, res) => {
   if (selectedTime) {
     try {
       const result = await axios.get(`${baseURL}api/?time=${selectedTime}`);
-      const wantedSoundtrack = result.data.music[1].file;
+      const wantedSoundtrack = result.data.music[gameIndex].file;
 
       // Update global variables:
       lastFetchedHour = req.body.setTime;
@@ -81,9 +81,16 @@ app.post("/set-soundtrack", async (req, res) => {
       res.redirect(`/?manual=true&time=${encodeURIComponent(selectedTime)}`); // encodeURIComponent() makes sure special characters (like AM, PM) in the time string are safely included in the URL
     } catch (error) {
       console.error("Error fetching manual soundtrack: ", error.message);
+      res.render("index.ejs", {
+        message: "Unable to fetch the requested soundtrack. Try again later.",
+        soundtrack: null,
+        time: selectedTime,
+      });
     }
   }
 });
+
+// TODO: Add a way for viewer to query a different games's soundtrack
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

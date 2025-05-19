@@ -1,5 +1,5 @@
 html {
-  background-color: #050849; /* To fill any whitespace */
+  background-color: #050849; /* To fill any whitespace/gaps */
   font-family: "Quicksand", sans-serif;
   color: wheat;
 }
@@ -7,6 +7,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  /* Below is commented out as ".viewport-wrapper" is used */
   /* height: 100dvh; 
   width: 100vw;
   overflow: hidden;
@@ -22,13 +23,14 @@ span {
 }
 
 .viewport-wrapper {
-  height: 100dvh; /* Use device-height */
+  height: 100vh; /* Fallback if 'dvh' does not work */
+  height: 100dvh; /* Use device-height - to address mobile device quirks */
   width: 100vw;
-  overflow: hidden; /* Ensures nothing inside bleeds out */
+  overflow: hidden; /* Prevents content from overflowing the viewport wrapper */
   position: relative;
 }
 
-/* ---------- Dedicated to the drawings: ---------- */
+/* ---------- Drawings Section: ---------- */
 
 .gradient-backgrounds {
   z-index: -10;
@@ -51,7 +53,7 @@ span {
     );
   background-blend-mode: overlay;
 
-  /* ----- Using a single radial gradient: -----
+  /* ----- Using a single radial gradient (ARCHIVED): -----
   background: radial-gradient(
     circle at bottom,
     #befff7 0%,
@@ -61,7 +63,7 @@ span {
   );
   */
 
-  /* ----- Using two divs with different gradients: -----
+  /* ----- Using two divs with different gradients (ARCHIVED): -----
   .night-gradient {
     height: 50%;
     width: 100%;
@@ -195,13 +197,13 @@ span {
   animation: bop 1.5s linear infinite, oscillate 60s ease-in-out infinite;
 }
 
-/* ---------- Dedicated to the main text: ---------- */
+/* ---------- Body Content Section: ---------- */
 /* TODO: Change to a customised audio player */
 audio::-webkit-media-controls-panel {
   background-color: rgb(245, 222, 179);
 }
 
-#body-visible {
+#visible-body {
   padding: 0 20px;
 }
 
@@ -218,7 +220,6 @@ audio::-webkit-media-controls-panel {
 #settings:focus {
   outline: 2px dashed #b5895d;
   border-radius: 25px;
-  /* box-shadow: 0 0 0 1px rgba(245, 199, 153, 0.4); */
 }
 
 #form {
@@ -258,8 +259,8 @@ select {
   color: #000000;
   border: 2px dashed hsl(34, 36%, 74%);
   border-radius: 12px;
-  padding: 0rem 2.5rem 0rem 1rem;
-  font-size: 1rem;
+  padding: 0.1rem 2.5rem 0.1rem 1rem;
+  font-size: 0.8rem;
   font-family: "Quicksand", sans-serif;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -302,7 +303,7 @@ select:focus {
   background-color: #b5895d;
   border: 2px solid hsla(34, 36%, 74%, 0);
   border-radius: 12px;
-  padding: 2px 1rem;
+  padding: 1.5px 1rem;
   color: black;
   text-decoration: none;
 }
