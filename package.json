@@ -1,5 +1,5 @@
 {
-  "name": "udemy-capstone-3-celestialstudy",
+  "name": "udemy-capstone-3-celestecommute",
   "version": "1.0.0",
   "description": "A webpage that will assist with studying by playing chill music and giving kind reminders. Built with Node.js, Express, EJS, and Animal Crossing: New Horizons API",
   "main": "index.js",
@@ -8,12 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ShannyxMP/Celestial-Study.git"
+    "url": "git+https://github.com/ShannyxMP/Celeste-Commute.git"
   },
   "keywords": [
     "node.js",
     "express",
     "ejs",
+    "axios",
     "API",
     "study",
     "web",
@@ -23,9 +24,9 @@
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/ShannyxMP/Celestial-Study/issues"
+    "url": "https://github.com/ShannyxMP/Celeste-Commute/issues"
   },
-  "homepage": "https://github.com/ShannyxMP/Celestial-Study#readme",
+  "homepage": "https://github.com/ShannyxMP/Celeste-Commute#readme",
   "dependencies": {
     "axios": "^1.9.0",
     "body-parser": "^2.2.0",

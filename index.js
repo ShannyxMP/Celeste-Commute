@@ -41,7 +41,7 @@ checkAndUpdateHour(); // Run once at startup
 
 // Route(s):
 app.get("/", async (req, res) => {
-  const requestedSoundtrack = req.query.manual === "true"; // === "true" checks if the value is exactly the string "true" | If the URL contains ?manual=true, then isManual will be true
+  const requestedSoundtrack = req.query.manual === "true"; // === "true" checks if the value is exactly the string "true" | If the URL contains ?manual=true, then 'songWasRequested' (in main.js) will be true
   const requestedTime = req.query.time;
   // Render homepage with initial soundtrack and time
   res.render("index.ejs", {
