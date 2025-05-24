@@ -5,13 +5,15 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 const baseURL = "https://ac-api.vercel.app/";
-const gameIndex = 1; // music[gameIndex] = 1 selects the "New Leaf" game soundtrack - array indices map to: 0 = New Horizons, 1 = New Leaf, 2 = City Folk, 3 = GameCube
+const gameIndex = 1; // music[gameIndex] = 1 selects the "New Leaf" game soundtrack BY DEFAULT - array indices map to: 0 = New Horizons, 1 = New Leaf, 2 = City Folk, 3 = GameCube
 
 // Middlewares:
 app.use(express.static("public")); // Handle static files
 app.use(bodyParser.urlencoded({ extended: true })); // Parse incoming form data
 
 let lastFetchedHour, currentSoundtrack;
+
+// TODO: Improve game selection - introduce ?function to change the variable 'gameIndex'
 
 // To get current time:
 function getCurrentHour() {
@@ -65,13 +67,14 @@ app.get("/current-soundtrack", (req, res) => {
 
 app.post("/set-soundtrack", async (req, res) => {
   // Handle incoming request to change hourly soundtrack based on selected time by client
-  const selectedTime = req.body.setTime; // Output eg.: 12AM
+  const selectedTime = req.body.setTime; // Output eg.: 12 am
+  const selectedGame = req.body.setGame; // Output are values 0-3
   console.log(`You are changing the time to ${selectedTime}`);
 
-  if (selectedTime) {
+  if (selectedTime && selectedGame) {
     try {
       const result = await axios.get(`${baseURL}api/?time=${selectedTime}`);
-      const wantedSoundtrack = result.data.music[gameIndex].file;
+      const wantedSoundtrack = result.data.music[selectedGame].file;
 
       // Update global variables:
       lastFetchedHour = req.body.setTime;
@@ -90,7 +93,7 @@ app.post("/set-soundtrack", async (req, res) => {
   }
 });
 
-// TODO: Add a way for viewer to query a different games's soundtrack
+// TODO: Notify client what game it's currently playing
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

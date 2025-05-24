@@ -95,7 +95,7 @@
           <!-- <a target="_blank" href="https://icons8.com/icon/59996/settings">Settings</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
         </button>
         <div id="form" class="collapsed">
-          <!-- TODO: Add a way for viewer to listen to other animal crossing games' music -->
+          <!-- TODO: Display what game is being played -->
           <form action="/set-soundtrack" method="POST">
             <label for="setTime">Time: </label>
             <select name="setTime" id="setTime">
@@ -109,6 +109,15 @@
               <option value="12 am">12 am</option>
               <% } %> <% } %>
             </select>
+            <br />
+            <label for="setGame">Game: </label>
+            <select name="setGame" id="setGame">
+              <option value="1">New Leaf</option>
+              <option value="0">New Horizons</option>
+              <option value="2">City Folk</option>
+              <option value="3">Game Cube</option>
+            </select>
+            <br />
             <input id="submit-btn" type="submit" />
             <br />
             <br />
