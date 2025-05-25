@@ -1,3 +1,5 @@
+// TODO: For future updates — store user-specific settings (like game/time) using sessions or query params - so multiple users don’t override each other’s soundtrack settings
+
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
@@ -5,15 +7,14 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 const baseURL = "https://ac-api.vercel.app/";
-const gameIndex = 1; // music[gameIndex] = 1 selects the "New Leaf" game soundtrack BY DEFAULT - array indices map to: 0 = New Horizons, 1 = New Leaf, 2 = City Folk, 3 = GameCube
 
 // Middlewares:
 app.use(express.static("public")); // Handle static files
 app.use(bodyParser.urlencoded({ extended: true })); // Parse incoming form data
 
 let lastFetchedHour, currentSoundtrack;
-
-// TODO: Improve game selection - introduce ?function to change the variable 'gameIndex'
+let gameIndex = 1; // music[gameIndex] = 1 selects the "New Leaf" game soundtrack BY DEFAULT - array indices map to: 0 = New Horizons, 1 = New Leaf, 2 = City Folk, 3 = GameCube
+let gameTitle = ""; // [x]: Notify user what game it's currently playing
 
 // To get current time:
 function getCurrentHour() {
@@ -31,6 +32,7 @@ async function checkAndUpdateHour() {
       const result = await axios.get(`${baseURL}api/?time=${hourNow}`);
       currentSoundtrack = result.data.music[gameIndex].file;
       lastFetchedHour = hourNow;
+      gameTitle = result.data.music[gameIndex].game;
     } catch (error) {
       console.error("API fetch error: ", error.message);
       currentSoundtrack = null;
@@ -50,6 +52,7 @@ app.get("/", async (req, res) => {
     message: currentSoundtrack
       ? null
       : "Unable to retrieve selected soundtrack. Try and refresh the page.",
+    game: gameTitle, // [x]: Notify user what game it's currently playing
     soundtrack: currentSoundtrack,
     time:
       requestedSoundtrack && requestedTime ? requestedTime : lastFetchedHour, // If requestedSoundtrack is true and requestedTime (e.g., "1PM", "9AM") is provided, use customTime for the time value passed
@@ -79,6 +82,8 @@ app.post("/set-soundtrack", async (req, res) => {
       // Update global variables:
       lastFetchedHour = req.body.setTime;
       currentSoundtrack = wantedSoundtrack;
+      gameIndex = selectedGame; // [x]: Improve game selection - change the variable 'gameIndex'
+      gameTitle = result.data.music[selectedGame].game; // [x]: Notify user what game it's currently playing
 
       // Redirect to homepage with manual override flag
       res.redirect(`/?manual=true&time=${encodeURIComponent(selectedTime)}`); // encodeURIComponent() makes sure special characters (like AM, PM) in the time string are safely included in the URL
@@ -92,8 +97,6 @@ app.post("/set-soundtrack", async (req, res) => {
     }
   }
 });
-
-// TODO: Notify client what game it's currently playing
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

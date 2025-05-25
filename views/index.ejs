@@ -80,7 +80,8 @@
       <main>
         <div id="visible-body">
           <h1>Celeste Commute, <span id="displayTime"><%= time %></span></h1>
-          <p><%= message %></p>
+          <p><%= message || game %></p>
+          <!-- [x]: Display what game is being played -->
 
           <% if (soundtrack) { %>
           <!-- TODO: Create a customised audio player -->
@@ -95,7 +96,6 @@
           <!-- <a target="_blank" href="https://icons8.com/icon/59996/settings">Settings</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
         </button>
         <div id="form" class="collapsed">
-          <!-- TODO: Display what game is being played -->
           <form action="/set-soundtrack" method="POST">
             <label for="setTime">Time: </label>
             <select name="setTime" id="setTime">
