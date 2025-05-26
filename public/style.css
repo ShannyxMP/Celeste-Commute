@@ -1,4 +1,4 @@
-/* TODO: Update form layout */
+/* [x]: Update form layout */
 
 html {
   background-color: #050849; /* To fill any whitespace/gaps */
@@ -200,6 +200,15 @@ span {
 }
 
 /* ---------- Body Content Section: ---------- */
+h1 {
+  margin-bottom: 0;
+}
+
+#displayMessage {
+  margin-top: 0;
+  font-size: smaller;
+}
+
 /* TODO: Change to a customised audio player */
 audio::-webkit-media-controls-panel {
   background-color: rgb(245, 222, 179);
@@ -207,6 +216,10 @@ audio::-webkit-media-controls-panel {
 
 #visible-body {
   padding: 0 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  align-items: center;
 }
 
 #settings {
@@ -226,7 +239,7 @@ audio::-webkit-media-controls-panel {
 
 #form {
   width: 260px;
-  margin: 0 20px;
+  margin: 10px 20px;
   padding: 20px 20px;
   background-color: rgb(245, 222, 179);
   border-radius: 25px;
@@ -234,12 +247,22 @@ audio::-webkit-media-controls-panel {
   max-height: 500px;
   overflow: hidden;
   opacity: 1;
+}
 
+#form form {
+  padding: 5px;
   display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: start;
+  gap: 10px;
+}
+
+#form div {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 }
 
 #form label {
@@ -253,6 +276,9 @@ audio::-webkit-media-controls-panel {
 }
 
 select {
+  width: 150px;
+  align-self: flex-end;
+
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -287,6 +313,7 @@ select:focus {
 }
 
 #submit-btn {
+  margin-top: 10px;
   background-color: #b5895d;
   border: 2px solid hsla(34, 36%, 74%, 0);
   border-radius: 12px;
@@ -294,6 +321,8 @@ select:focus {
   color: black;
   font-size: 1rem;
   font-family: "Quicksand", sans-serif;
+
+  align-self: flex-end;
 }
 
 #submit-btn:hover {
@@ -308,6 +337,8 @@ select:focus {
   padding: 1.5px 1rem;
   color: black;
   text-decoration: none;
+
+  align-self: center;
 }
 
 #reset-link:hover {

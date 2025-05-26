@@ -68,6 +68,7 @@
           src="images/Night-Car.png"
           alt="drawing of car at night"
         />
+        <!-- TODO: Add speech bubble with kind reminders -->
         <div id="credits">
           <p>
             Developed by
@@ -80,7 +81,7 @@
       <main>
         <div id="visible-body">
           <h1>Celeste Commute, <span id="displayTime"><%= time %></span></h1>
-          <p><%= message || game %></p>
+          <p id="displayMessage"><%= message || game %></p>
           <!-- [x]: Display what game is being played -->
 
           <% if (soundtrack) { %>
@@ -89,42 +90,44 @@
             <source src="<%= soundtrack %>" type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
-        </div>
 
-        <button id="settings">
-          <img src="images/settings-icon.png" alt="settings" />
-          <!-- <a target="_blank" href="https://icons8.com/icon/59996/settings">Settings</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
-        </button>
-        <div id="form" class="collapsed">
-          <form action="/set-soundtrack" method="POST">
-            <label for="setTime">Time: </label>
-            <select name="setTime" id="setTime">
-              <% for (let i = 0; i < 24; i++) { %> <% if (i > 0 && i <= 11) { %>
-              <option value="<%= i %> am"><%= i %> am</option>
-              <% } else if (i === 12) { %>
-              <option value="<%= i %> pm"><%= i %> pm</option>
-              <% } else if (i > 12 && i < 24) { %> <% let j = i - 12; %>
-              <option value="<%= j %> pm"><%= j %> pm</option>
-              <% } else { %>
-              <option value="12 am">12 am</option>
-              <% } %> <% } %>
-            </select>
-            <br />
-            <label for="setGame">Game: </label>
-            <select name="setGame" id="setGame">
-              <option value="1">New Leaf</option>
-              <option value="0">New Horizons</option>
-              <option value="2">City Folk</option>
-              <option value="3">Game Cube</option>
-            </select>
-            <br />
-            <input id="submit-btn" type="submit" />
-            <br />
-            <br />
-            <a id="reset-link" href="/">Reset to auto mode</a>
-          </form>
+          <button id="settings">
+            <img src="images/settings-icon.png" alt="settings" />
+            <!-- <a target="_blank" href="https://icons8.com/icon/59996/settings">Settings</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
+          </button>
+          <div id="form" class="collapsed">
+            <form action="/set-soundtrack" method="POST">
+              <div>
+                <label for="setTime">Time: </label>
+                <select name="setTime" id="setTime">
+                  <% for (let i = 0; i < 24; i++) { %> <% if (i > 0 && i <= 11)
+                  { %>
+                  <option value="<%= i %> am"><%= i %> am</option>
+                  <% } else if (i === 12) { %>
+                  <option value="<%= i %> pm"><%= i %> pm</option>
+                  <% } else if (i > 12 && i < 24) { %> <% let j = i - 12; %>
+                  <option value="<%= j %> pm"><%= j %> pm</option>
+                  <% } else { %>
+                  <option value="12 am">12 am</option>
+                  <% } %> <% } %>
+                </select>
+              </div>
+              <div>
+                <label for="setGame">Game: </label>
+                <select name="setGame" id="setGame">
+                  <option value="1">New Leaf</option>
+                  <option value="0">New Horizons</option>
+                  <option value="2">City Folk</option>
+                  <option value="3">Game Cube</option>
+                </select>
+              </div>
+              <input id="submit-btn" type="submit" />
+              <br />
+              <a id="reset-link" href="/">Reset to auto mode</a>
+            </form>
+          </div>
+          <% } %>
         </div>
-        <% } %>
       </main>
     </div>
     <script src="main.js"></script>
