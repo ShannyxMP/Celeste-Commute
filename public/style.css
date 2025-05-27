@@ -209,6 +209,15 @@ h1 {
   font-size: smaller;
 }
 
+#reminder {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#reminder.visible {
+  opacity: 1;
+}
+
 /* TODO: Change to a customised audio player */
 audio::-webkit-media-controls-panel {
   background-color: rgb(245, 222, 179);
