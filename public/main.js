@@ -1,3 +1,4 @@
+// ********** CHANGE SOUNDTRACK SECTION **********
 // Poll the server every 30 seconds to check if the soundtrack has changed
 
 const songWasRequested = window.location.search.includes("manual=true"); // Skip polling if the URL includes a manual override flag (?manual=true)
@@ -101,10 +102,12 @@ function postKindReminder() {
 }
 setInterval(postKindReminder, 600000); // (1st) Interval set to 10minutes
 
+// ********** AUDIO CONFIGURATION SECTION **********
 // Set initial audio volume to 20%
 var audio = document.querySelector("audio");
 audio.volume = 0.2;
 
+// ********** FORM CONFIGURATION SECTION **********
 // Event listener for the settings button
 document.addEventListener("DOMContentLoaded", () => {
   const settings = document.querySelector("#settings");
