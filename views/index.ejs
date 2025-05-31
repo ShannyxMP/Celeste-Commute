@@ -85,9 +85,7 @@
 
       <main>
         <div id="visible-body">
-          <h1>Celeste Commute, <span id="displayTime"><%= time %></span></h1>
-          <!-- Display what game is being played if no error -->
-          <p id="displayMessage"><%= message || game %></p>
+          <h1>Celeste Commute</h1>
 
           <% if (soundtrack) { %>
           <!-- TODO: Create a customised audio player -->
@@ -100,20 +98,27 @@
             <img src="images/settings-icon.png" alt="settings" />
             <!-- <a target="_blank" href="https://icons8.com/icon/59996/settings">Settings</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
           </button>
-          <div id="form" class="collapsed">
+          <div id="form" class="">
             <form action="/set-soundtrack" method="POST">
+              <div>
+                <!-- Display what game is being played if no error -->
+                <p id="displayMessage">
+                  Currently playing: <%= game %>, <%= soundtrackTime %>
+                  soundtrack.
+                </p>
+              </div>
               <div>
                 <label for="setTime">Time: </label>
                 <select name="setTime" id="setTime">
                   <% for (let i = 0; i < 24; i++) { %> <% if (i > 0 && i <= 11)
                   { %>
-                  <option value="<%= i %> am"><%= i %> am</option>
+                  <option value="<%= i %>AM"><%= i %>AM</option>
                   <% } else if (i === 12) { %>
-                  <option value="<%= i %> pm"><%= i %> pm</option>
+                  <option value="<%= i %>PM"><%= i %>PM</option>
                   <% } else if (i > 12 && i < 24) { %> <% let j = i - 12; %>
-                  <option value="<%= j %> pm"><%= j %> pm</option>
+                  <option value="<%= j %>PM"><%= j %>PM</option>
                   <% } else { %>
-                  <option value="12 am">12 am</option>
+                  <option value="12AM">12AM</option>
                   <% } %> <% } %>
                 </select>
               </div>
@@ -127,10 +132,11 @@
                 </select>
               </div>
               <input id="submit-btn" type="submit" />
-              <br />
               <a id="reset-link" href="/">Reset to auto mode</a>
             </form>
           </div>
+          <% } else { %>
+          <p><%= message %></p>
           <% } %>
         </div>
       </main>

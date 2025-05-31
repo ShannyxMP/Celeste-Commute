@@ -18,10 +18,6 @@ main {
   z-index: 10;
 }
 
-span {
-  font-size: smaller;
-}
-
 .viewport-wrapper {
   height: 100vh; /* Fallback if 'dvh' does not work */
   height: 100dvh; /* Use device-height - to address mobile device quirks */
@@ -203,8 +199,9 @@ h1 {
 }
 
 #displayMessage {
+  color: black;
   margin-top: 0;
-  font-size: smaller;
+  font-size: 0.9rem;
 }
 
 #reminder {
@@ -274,6 +271,8 @@ audio::-webkit-media-controls-panel {
 
 #form label {
   color: black;
+  font-size: 0.9rem;
+  padding-top: 3px;
 }
 
 #form.collapsed {
@@ -295,7 +294,7 @@ select {
   border: 2px dashed hsl(34, 36%, 74%);
   border-radius: 12px;
   padding: 0.1rem 2.5rem 0.1rem 1rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-family: "Quicksand", sans-serif;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -320,13 +319,12 @@ select:focus {
 }
 
 #submit-btn {
-  margin-top: 10px;
   background-color: #b5895d;
   border: 2px solid hsla(34, 36%, 74%, 0);
   border-radius: 12px;
   padding: 0rem 1rem;
   color: black;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: "Quicksand", sans-serif;
 
   align-self: flex-end;
@@ -341,8 +339,10 @@ select:focus {
   background-color: #b5895d;
   border: 2px solid hsla(34, 36%, 74%, 0);
   border-radius: 12px;
+  margin-top: 15px;
   padding: 1.5px 1rem;
   color: black;
+  font-size: 0.9rem;
   text-decoration: none;
 
   align-self: center;
