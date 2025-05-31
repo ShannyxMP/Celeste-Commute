@@ -16,17 +16,22 @@ let lastFetchedHour, currentSoundtrack;
 let gameIndex = 1; // music[gameIndex] = 1 selects the "New Leaf" game soundtrack BY DEFAULT - array indices map to: 0 = New Horizons, 1 = New Leaf, 2 = City Folk, 3 = GameCube
 let gameTitle = "";
 
-// To get current time:
+// To get current hour:
 function getCurrentHour() {
-  return new Date().toLocaleTimeString([], {
-    hour: "2-digit",
-  }); // Output eg.: 06 pm
+  let hour = new Date().getHours();
+  let ampm = hour >= 12 ? "PM" : "AM";
+
+  // Convert to 12-hour format
+  hour = hour % 12 || 12; // <-- If the result of hour % 12 is 0, then use 12
+
+  return { hour, ampm };
 }
 
-// Update song on server-side every hour:
 async function checkAndUpdateHour() {
-  const hourNow = getCurrentHour();
+  const { hour, ampm } = getCurrentHour();
 
+  // Update song on server-side every hour:
+  const hourNow = hour + ampm; // Outputs: 4PM
   if (hourNow !== lastFetchedHour) {
     try {
       const result = await axios.get(`${baseURL}api/?time=${hourNow}`);
