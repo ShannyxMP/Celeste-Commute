@@ -54,7 +54,7 @@ app.get("/", async (req, res) => {
       : "Unable to retrieve selected soundtrack. Try and refresh the page.",
     game: gameTitle,
     soundtrack: currentSoundtrack,
-    time:
+    soundtrackTime:
       requestedSoundtrack && requestedTime ? requestedTime : lastFetchedHour, // If requestedSoundtrack is true and requestedTime (e.g., "1PM", "9AM") is provided, use customTime for the time value passed
   });
 });
@@ -64,7 +64,7 @@ app.get("/current-soundtrack", (req, res) => {
   res.json({
     // Return current soundtrack and time as JSON for client polling
     soundtrack: currentSoundtrack,
-    time: lastFetchedHour,
+    soundtrackTime: lastFetchedHour,
   });
 });
 
@@ -92,7 +92,7 @@ app.post("/set-soundtrack", async (req, res) => {
       res.render("index.ejs", {
         message: "Unable to fetch the requested soundtrack. Try again later.",
         soundtrack: null,
-        time: selectedTime,
+        soundtrackTime: selectedTime,
       });
     }
   }
