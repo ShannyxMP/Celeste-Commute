@@ -117,5 +117,8 @@ I also plan to practice working with more complex API routes. For this project s
 ## Future improvements
 
 - [ ] Customise audio player to match the theme
-- [ ] Allow users to select which game’s soundtrack to listen to
-- [ ] Refine and expand animations
+- [x] Allow users to select which game’s soundtrack to listen to
+- [ ] Refine layout
+- [ ] Expand animations
+- [ ] Post kind reminders
+- [x] Add a digital clock
