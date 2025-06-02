@@ -38,6 +38,28 @@ if (!songWasRequested) {
   }, 30000); // To fetch data every 30secs
 }
 
+// ********** TIME CONFIGURATION SECTION **********
+// To get current time:
+function getCurrentTime() {
+  const time = new Date();
+  let hour = time.getHours(); // Output eg.: 4
+  let minute = time.getMinutes(); // Output eg.: 8
+  let ampm = hour >= 12 ? "PM" : "AM";
+
+  // Convert to 12-hour format
+  hour = hour % 12 || 12; // <-- If the result of hour % 12 is 0, then use 12
+
+  // Convert to string and ensure string has at least two characters, if not, it will add "0"
+  hour = hour.toString().padStart(2, "0"); // Output eg.: "04"
+  minute = minute.toString().padStart(2, "0"); // Output eg.: "08"
+
+  document.querySelector("#hour").innerHTML = hour;
+  document.querySelector("#minute").innerHTML = minute;
+}
+setInterval(getCurrentTime, 5000);
+getCurrentTime();
+
+// ********** AUDIO CONFIGURATION SECTION **********
 // Set initial audio volume to 20%
 var audio = document.querySelector("audio");
 audio.volume = 0.2;
