@@ -204,7 +204,42 @@ h1 {
   font-size: 0.9rem;
 }
 
+#reminder-container {
+  z-index: 5;
+  width: 100%;
+  height: 60%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-column: 1fr;
+  grid-row: 1fr;
+  /* TODO: Change to grid so that you can overlay items */
+  justify-content: center;
+  align-items: center;
+}
+
+#reminder-flex-container {
+  height: 100%;
+  width: 100%;
+
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#reminder-container img {
+  width: 100%;
+}
+
 #reminder {
+  z-index: 10;
+  color: black;
+
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
