@@ -14,19 +14,24 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parse incoming form data
 
 let lastFetchedHour, currentSoundtrack;
 let gameIndex = 1; // music[gameIndex] = 1 selects the "New Leaf" game soundtrack BY DEFAULT - array indices map to: 0 = New Horizons, 1 = New Leaf, 2 = City Folk, 3 = GameCube
-let gameTitle = ""; // [x]: Notify user what game it's currently playing
+let gameTitle = "";
 
-// To get current time:
+// To get current hour:
 function getCurrentHour() {
-  return new Date().toLocaleTimeString([], {
-    hour: "2-digit",
-  }); // Output eg.: 06 pm
+  let hour = new Date().getHours();
+  let ampm = hour >= 12 ? "PM" : "AM";
+
+  // Convert to 12-hour format
+  hour = hour % 12 || 12; // <-- If the result of hour % 12 is 0, then use 12
+
+  return { hour, ampm };
 }
 
-// Update song on server-side every hour:
 async function checkAndUpdateHour() {
-  const hourNow = getCurrentHour();
+  const { hour, ampm } = getCurrentHour();
 
+  // Update song on server-side every hour:
+  const hourNow = hour + ampm; // Outputs: 4PM
   if (hourNow !== lastFetchedHour) {
     try {
       const result = await axios.get(`${baseURL}api/?time=${hourNow}`);
@@ -40,7 +45,7 @@ async function checkAndUpdateHour() {
   }
   // console.log(lastFetchedHour);
 }
-setInterval(checkAndUpdateHour, 30000); // Periodically check if the hour has changed; if so, fetch the new track from external API
+setInterval(checkAndUpdateHour, 30000); // Periodically (30seconds) check if the hour has changed; if so, fetch the new track from external API
 checkAndUpdateHour(); // Run once at startup
 
 // Route(s):
@@ -52,9 +57,9 @@ app.get("/", async (req, res) => {
     message: currentSoundtrack
       ? null
       : "Unable to retrieve selected soundtrack. Try and refresh the page.",
-    game: gameTitle, // [x]: Notify user what game it's currently playing
+    game: gameTitle,
     soundtrack: currentSoundtrack,
-    time:
+    soundtrackTime:
       requestedSoundtrack && requestedTime ? requestedTime : lastFetchedHour, // If requestedSoundtrack is true and requestedTime (e.g., "1PM", "9AM") is provided, use customTime for the time value passed
   });
 });
@@ -64,7 +69,7 @@ app.get("/current-soundtrack", (req, res) => {
   res.json({
     // Return current soundtrack and time as JSON for client polling
     soundtrack: currentSoundtrack,
-    time: lastFetchedHour,
+    soundtrackTime: lastFetchedHour,
   });
 });
 
@@ -82,8 +87,8 @@ app.post("/set-soundtrack", async (req, res) => {
       // Update global variables:
       lastFetchedHour = req.body.setTime;
       currentSoundtrack = wantedSoundtrack;
-      gameIndex = selectedGame; // [x]: Improve game selection - change the variable 'gameIndex'
-      gameTitle = result.data.music[selectedGame].game; // [x]: Notify user what game it's currently playing
+      gameIndex = selectedGame;
+      gameTitle = result.data.music[selectedGame].game;
 
       // Redirect to homepage with manual override flag
       res.redirect(`/?manual=true&time=${encodeURIComponent(selectedTime)}`); // encodeURIComponent() makes sure special characters (like AM, PM) in the time string are safely included in the URL
@@ -92,7 +97,7 @@ app.post("/set-soundtrack", async (req, res) => {
       res.render("index.ejs", {
         message: "Unable to fetch the requested soundtrack. Try again later.",
         soundtrack: null,
-        time: selectedTime,
+        soundtrackTime: selectedTime,
       });
     }
   }

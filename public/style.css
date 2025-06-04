@@ -1,5 +1,3 @@
-/* [x]: Update form layout */
-
 html {
   background-color: #050849; /* To fill any whitespace/gaps */
   font-family: "Quicksand", sans-serif;
@@ -18,10 +16,6 @@ body {
 
 main {
   z-index: 10;
-}
-
-span {
-  font-size: smaller;
 }
 
 .viewport-wrapper {
@@ -221,8 +215,53 @@ span {
 }
 
 #displayMessage {
+  color: black;
   margin-top: 0;
-  font-size: smaller;
+  font-size: 0.9rem;
+}
+
+#reminder-container {
+  z-index: 5;
+  width: 100%;
+  height: 60%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-column: 1fr;
+  grid-row: 1fr;
+  /* TODO: Change to grid so that you can overlay items */
+  justify-content: center;
+  align-items: center;
+}
+
+#reminder-flex-container {
+  height: 100%;
+  width: 100%;
+
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#reminder-container img {
+  width: 100%;
+}
+
+#reminder {
+  z-index: 10;
+  color: black;
+
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#reminder.visible {
+  opacity: 1;
 }
 
 /* TODO: Change to a customised audio player */
@@ -283,6 +322,8 @@ audio::-webkit-media-controls-panel {
 
 #form label {
   color: black;
+  font-size: 0.9rem;
+  padding-top: 3px;
 }
 
 #form.collapsed {
@@ -304,7 +345,7 @@ select {
   border: 2px dashed hsl(34, 36%, 74%);
   border-radius: 12px;
   padding: 0.1rem 2.5rem 0.1rem 1rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-family: "Quicksand", sans-serif;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -329,13 +370,12 @@ select:focus {
 }
 
 #submit-btn {
-  margin-top: 10px;
   background-color: #b5895d;
   border: 2px solid hsla(34, 36%, 74%, 0);
   border-radius: 12px;
   padding: 0rem 1rem;
   color: black;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: "Quicksand", sans-serif;
 
   align-self: flex-end;
@@ -350,8 +390,10 @@ select:focus {
   background-color: #b5895d;
   border: 2px solid hsla(34, 36%, 74%, 0);
   border-radius: 12px;
+  margin-top: 15px;
   padding: 1.5px 1rem;
   color: black;
+  font-size: 0.9rem;
   text-decoration: none;
 
   align-self: center;

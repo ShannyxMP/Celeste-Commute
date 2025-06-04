@@ -1,3 +1,4 @@
+// ********** CHANGE SOUNDTRACK SECTION **********
 // Poll the server every 30 seconds to check if the soundtrack has changed
 
 const songWasRequested = window.location.search.includes("manual=true"); // Skip polling if the URL includes a manual override flag (?manual=true)
@@ -38,6 +39,69 @@ if (!songWasRequested) {
   }, 30000); // To fetch data every 30secs
 }
 
+// ********** KIND REMINDERS SECTION **********
+const reminders = [
+  // 🌟 General Positivity
+  "You got this!",
+  "Keep going!",
+  "One step at a time.",
+  "You've come so far.",
+  "You’re doing great!",
+  "You’re stronger than you think.",
+  "Every little bit counts.",
+  "Be kind to yourself.",
+
+  // 🌙 Calming & Supportive
+  "Take a deep breath.",
+  "It’s okay to slow down.",
+  "Rest is productive.",
+  "You deserve peace.",
+  "Let the calm in.",
+
+  // 💪 Motivational
+  "Stay curious.",
+  "You’re making progress.",
+  "Tiny wins are still wins.",
+  "Keep showing up.",
+  "Believe in your pace.",
+
+  // 🍃 Wholesome & Friendly
+  "You're not alone.",
+  "You matter.",
+  "Today is yours.",
+  "The stars are cheering for you.",
+  "Even clouds make way for sunshine.",
+];
+
+// Update kind reminder every 10minutes
+function postKindReminder() {
+  const reminderBox = document.querySelector("#reminder");
+  const reminderText = document.querySelector("#reminder p");
+
+  const randomNumber = Math.floor(Math.random() * reminders.length);
+  const newReminder = reminders[randomNumber];
+  // console.log(newReminder);
+
+  if (reminderText.innerHTML !== newReminder) {
+    // Fade out first
+    reminderBox.classList.remove("visible");
+
+    // (2nd) Wait for the fade-out to complete before updating the text
+    setTimeout(() => {
+      reminderText.innerHTML = newReminder;
+
+      // Fade in the new text
+      reminderBox.classList.add("visible");
+
+      // (3rd) Fade out after delay
+      setTimeout(() => {
+        reminderBox.classList.remove("visible");
+      }, 10000); // (3rd) Keep it visible for 10seconds
+    }, 500); // (2nd) Match fade-out duration set in CSS -> (transition: opacity 0.5s ...)
+  }
+}
+setInterval(postKindReminder, 600000); // (1st) Interval set to 10minutes
+
 // ********** TIME CONFIGURATION SECTION **********
 // To get current time:
 function getCurrentTime() {
@@ -64,6 +128,7 @@ getCurrentTime();
 var audio = document.querySelector("audio");
 audio.volume = 0.2;
 
+// ********** FORM CONFIGURATION SECTION **********
 // Event listener for the settings button
 document.addEventListener("DOMContentLoaded", () => {
   const settings = document.querySelector("#settings");
