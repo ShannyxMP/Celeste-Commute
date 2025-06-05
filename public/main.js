@@ -77,6 +77,7 @@ const reminders = [
 function postKindReminder() {
   const reminderBox = document.querySelector("#reminder");
   const reminderText = document.querySelector("#reminder p");
+  const speechBubble = document.querySelector("#reminder-grid-container img");
 
   const randomNumber = Math.floor(Math.random() * reminders.length);
   const newReminder = reminders[randomNumber];
@@ -85,6 +86,7 @@ function postKindReminder() {
   if (reminderText.innerHTML !== newReminder) {
     // Fade out first
     reminderBox.classList.remove("visible");
+    speechBubble.classList.remove("visible");
 
     // (2nd) Wait for the fade-out to complete before updating the text
     setTimeout(() => {
@@ -92,10 +94,12 @@ function postKindReminder() {
 
       // Fade in the new text
       reminderBox.classList.add("visible");
+      speechBubble.classList.add("visible");
 
       // (3rd) Fade out after delay
       setTimeout(() => {
         reminderBox.classList.remove("visible");
+        speechBubble.classList.remove("visible");
       }, 10000); // (3rd) Keep it visible for 10seconds
     }, 500); // (2nd) Match fade-out duration set in CSS -> (transition: opacity 0.5s ...)
   }
