@@ -1,3 +1,5 @@
+/* TODO: Check z-index properties for all relevent elements */
+
 html {
   background-color: #050849; /* To fill any whitespace/gaps */
   font-family: "Quicksand", sans-serif;
@@ -194,6 +196,12 @@ main {
 }
 
 /* ---------- Body Content Section: ---------- */
+#titleImage {
+  z-index: -1;
+  width: 350px;
+  opacity: 1;
+}
+
 #timeContainer {
   position: absolute;
   left: 0;
