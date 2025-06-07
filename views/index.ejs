@@ -91,6 +91,12 @@
           <span id="hour"></span>
           <span id="minute"></span>
         </div>
+
+        <button id="settings">
+          <img src="images/settings-icon.png" alt="settings" />
+          <!-- <a target="_blank" href="https://icons8.com/icon/59996/settings">Settings</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
+        </button>
+
         <div id="visible-body">
           <img
             id="titleImage"
@@ -99,57 +105,56 @@
             alt="title image of Celeste Commute"
           />
 
-          <% if (soundtrack) { %>
-          <!-- TODO: Create a customised audio player -->
-          <audio id="audioPlayer" controls loop>
-            <source src="<%= soundtrack %>" type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
+          <div id="audio-container">
+            <% if (soundtrack) { %>
+            <!-- TODO: Create a customised audio player -->
+            <audio id="audioPlayer" controls loop>
+              <source src="<%= soundtrack %>" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
 
-          <button id="settings">
-            <img src="images/settings-icon.png" alt="settings" />
-            <!-- <a target="_blank" href="https://icons8.com/icon/59996/settings">Settings</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
-          </button>
-          <div id="form" class="">
-            <form action="/set-soundtrack" method="POST">
-              <div>
-                <!-- Display what game is being played if no error -->
-                <p id="displayMessage">
-                  Currently playing: <%= game %>, <%= soundtrackTime %>
-                  soundtrack.
-                </p>
-              </div>
-              <div>
-                <label for="setTime">Time: </label>
-                <select name="setTime" id="setTime">
-                  <% for (let i = 0; i < 24; i++) { %> <% if (i > 0 && i <= 11)
-                  { %>
-                  <option value="<%= i %>AM"><%= i %>AM</option>
-                  <% } else if (i === 12) { %>
-                  <option value="<%= i %>PM"><%= i %>PM</option>
-                  <% } else if (i > 12 && i < 24) { %> <% let j = i - 12; %>
-                  <option value="<%= j %>PM"><%= j %>PM</option>
-                  <% } else { %>
-                  <option value="12AM">12AM</option>
-                  <% } %> <% } %>
-                </select>
-              </div>
-              <div>
-                <label for="setGame">Game: </label>
-                <select name="setGame" id="setGame">
-                  <option value="1">New Leaf</option>
-                  <option value="0">New Horizons</option>
-                  <option value="2">City Folk</option>
-                  <option value="3">Game Cube</option>
-                </select>
-              </div>
-              <input id="submit-btn" type="submit" />
-              <a id="reset-link" href="/">Reset to auto mode</a>
-            </form>
+            <div id="form" class="collapsed">
+              <form action="/set-soundtrack" method="POST">
+                <div>
+                  <!-- Display what game is being played if no error -->
+                  <p id="displayMessage">
+                    Currently playing: <span><%= game %></span>,
+                    <span><%= soundtrackTime %></span>
+                    soundtrack.
+                  </p>
+                </div>
+                <div>
+                  <label for="setTime">Time: </label>
+                  <select name="setTime" id="setTime">
+                    <% for (let i = 0; i < 24; i++) { %> <% if (i > 0 && i <=
+                    11) { %>
+                    <option value="<%= i %>AM"><%= i %>AM</option>
+                    <% } else if (i === 12) { %>
+                    <option value="<%= i %>PM"><%= i %>PM</option>
+                    <% } else if (i > 12 && i < 24) { %> <% let j = i - 12; %>
+                    <option value="<%= j %>PM"><%= j %>PM</option>
+                    <% } else { %>
+                    <option value="12AM">12AM</option>
+                    <% } %> <% } %>
+                  </select>
+                </div>
+                <div>
+                  <label for="setGame">Game: </label>
+                  <select name="setGame" id="setGame">
+                    <option value="1">New Leaf</option>
+                    <option value="0">New Horizons</option>
+                    <option value="2">City Folk</option>
+                    <option value="3">Game Cube</option>
+                  </select>
+                </div>
+                <input id="submit-btn" type="submit" />
+                <a id="reset-link" href="/">Reset to auto mode</a>
+              </form>
+            </div>
+            <% } else { %>
+            <p><%= message %></p>
+            <% } %>
           </div>
-          <% } else { %>
-          <p><%= message %></p>
-          <% } %>
         </div>
       </main>
     </div>

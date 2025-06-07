@@ -39,6 +39,35 @@ if (!songWasRequested) {
   }, 30000); // To fetch data every 30secs
 }
 
+// ********** AUDIO CONFIGURATION SECTION **********
+// Set initial audio volume to 20%
+var audio = document.querySelector("audio");
+audio.volume = 0.2;
+
+// ********** VISIBLE BODY CONFIGURATION SECTION **********
+
+setInterval(async () => {
+  if (!audio.paused) {
+    document.querySelector("#titleImage").classList.remove("visible");
+    document.querySelector("#audio-container").classList.add("move");
+  } else {
+    document.querySelector("#titleImage").classList.add("visible");
+    document.querySelector("#audio-container").classList.remove("move");
+  }
+}, 1000);
+
+// ********** FORM CONFIGURATION SECTION **********
+// Event listener for the settings button
+document.addEventListener("DOMContentLoaded", () => {
+  const settings = document.querySelector("#settings");
+  const form = document.querySelector("#form");
+
+  settings.addEventListener("click", () => {
+    // Toggle settings form visibility when settings button is clicked
+    form.classList.toggle("collapsed");
+  });
+});
+
 // ********** KIND REMINDERS SECTION **********
 const reminders = [
   // 🌟 General Positivity
@@ -75,36 +104,38 @@ const reminders = [
 
 // Update kind reminder every 10minutes
 function postKindReminder() {
-  const reminderBox = document.querySelector("#reminder");
-  const reminderText = document.querySelector("#reminder p");
-  const speechBubble = document.querySelector("#reminder-grid-container img");
+  if (!audio.paused) {
+    const reminderBox = document.querySelector("#reminder-text");
+    const reminderText = document.querySelector("#reminder-text p");
+    const speechBubble = document.querySelector("#reminder-grid-container img");
 
-  const randomNumber = Math.floor(Math.random() * reminders.length);
-  const newReminder = reminders[randomNumber];
-  // console.log(newReminder);
+    const randomNumber = Math.floor(Math.random() * reminders.length);
+    const newReminder = reminders[randomNumber];
+    // console.log(newReminder);
 
-  if (reminderText.innerHTML !== newReminder) {
-    // Fade out first
-    reminderBox.classList.remove("visible");
-    speechBubble.classList.remove("visible");
+    if (reminderText.innerHTML !== newReminder) {
+      // Fade out first
+      reminderBox.classList.remove("visible");
+      speechBubble.classList.remove("visible");
 
-    // (2nd) Wait for the fade-out to complete before updating the text
-    setTimeout(() => {
-      reminderText.innerHTML = newReminder;
-
-      // Fade in the new text
-      reminderBox.classList.add("visible");
-      speechBubble.classList.add("visible");
-
-      // (3rd) Fade out after delay
+      // (2nd) Wait for the fade-out to complete before updating the text
       setTimeout(() => {
-        reminderBox.classList.remove("visible");
-        speechBubble.classList.remove("visible");
-      }, 10000); // (3rd) Keep it visible for 10seconds
-    }, 500); // (2nd) Match fade-out duration set in CSS -> (transition: opacity 0.5s ...)
+        reminderText.innerHTML = newReminder;
+
+        // Fade in the new text
+        reminderBox.classList.add("visible");
+        speechBubble.classList.add("visible");
+
+        // (3rd) Fade out after delay
+        setTimeout(() => {
+          reminderBox.classList.remove("visible");
+          speechBubble.classList.remove("visible");
+        }, 10000); // (3rd) Keep it visible for 10seconds
+      }, 500); // (2nd) Match fade-out duration set in CSS -> (transition: opacity 0.5s ...)
+    }
   }
 }
-setInterval(postKindReminder, 600000); // (1st) Interval set to 10minutes
+setInterval(postKindReminder, 5000); // (1st) Interval set to 10minutes
 
 // ********** TIME CONFIGURATION SECTION **********
 // To get current time:
@@ -126,20 +157,3 @@ function getCurrentTime() {
 }
 setInterval(getCurrentTime, 5000);
 getCurrentTime();
-
-// ********** AUDIO CONFIGURATION SECTION **********
-// Set initial audio volume to 20%
-var audio = document.querySelector("audio");
-audio.volume = 0.2;
-
-// ********** FORM CONFIGURATION SECTION **********
-// Event listener for the settings button
-document.addEventListener("DOMContentLoaded", () => {
-  const settings = document.querySelector("#settings");
-  const form = document.querySelector("#form");
-
-  settings.addEventListener("click", () => {
-    // Toggle settings form visibility when settings button is clicked
-    form.classList.toggle("collapsed");
-  });
-});
