@@ -138,22 +138,37 @@ function postKindReminder() {
 setInterval(postKindReminder, 5000); // (1st) Interval set to 10minutes
 
 // ********** TIME CONFIGURATION SECTION **********
-// To get current time:
-function getCurrentTime() {
-  const time = new Date();
-  let hour = time.getHours(); // Output eg.: 4
-  let minute = time.getMinutes(); // Output eg.: 8
+// To get current date and time:
+function getCurrentDateAndTime() {
+  const now = new Date();
+  let hour = now.getHours(); // Output eg.: 4
+  let minute = now.getMinutes(); // Output eg.: 8
   let ampm = hour >= 12 ? "PM" : "AM";
+
+  console.log(ampm);
 
   // Convert to 12-hour format
   hour = hour % 12 || 12; // <-- If the result of hour % 12 is 0, then use 12
 
+  // Get current date:
+  let month = now.getMonth() + 1;
+  let dayNum = now.getDate();
+
   // Convert to string and ensure string has at least two characters, if not, it will add "0"
   hour = hour.toString().padStart(2, "0"); // Output eg.: "04"
-  minute = minute.toString().padStart(2, "0"); // Output eg.: "08"
+  minute = minute.toString().padStart(2, "0");
+  month = month.toString().padStart(2, "0");
+  dayNum = dayNum.toString().padStart(2, "0");
+
+  dayOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  let dayChar = dayOfWeek[now.getDay()];
 
   document.querySelector("#hour").innerHTML = hour;
   document.querySelector("#minute").innerHTML = minute;
+  document.querySelector("#ampm").innerHTML = ampm;
+  document.querySelector("#dayChar").innerHTML = dayChar;
+  document.querySelector("#dayNum").innerHTML = dayNum;
+  document.querySelector("#month").innerHTML = month;
 }
-setInterval(getCurrentTime, 5000);
-getCurrentTime();
+setInterval(getCurrentDateAndTime, 5000);
+getCurrentDateAndTime();

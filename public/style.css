@@ -209,23 +209,26 @@ main {
   opacity: 1;
 }
 
-#timeContainer {
+#timeDateContainer {
   position: absolute;
   left: 0;
   top: 0;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  gap: 0;
-  margin-left: 15px;
+  gap: 15px;
+  margin-left: 10px;
 }
 
-#timeContainer span {
-  font-size: 4rem;
+#timeDateContainer p {
+  margin-top: 8px;
+}
+
+#timeDateContainer span {
   font-weight: bold;
   padding: 0;
-  height: 64px;
+  height: 50px;
   color: rgba(179, 189, 245, 0.25);
 }
 
