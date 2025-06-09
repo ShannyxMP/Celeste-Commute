@@ -1,4 +1,11 @@
-/* TODO: Check z-index properties for all relevent elements */
+/* NOTE: z-index:
+10  #settings
+9   #titleImage.visible**
+5   #audio-container
+1   #reminder-grid-container
+-1  #titleImage**
+-9  #drawing-flex-container .drawing 
+-10 .gradient-backgrounds */
 
 html {
   background-color: #050849; /* To fill any whitespace/gaps */
@@ -14,10 +21,6 @@ body {
   width: 100vw;
   overflow: hidden;
   position: relative; */
-}
-
-main {
-  z-index: 10;
 }
 
 .viewport-wrapper {
@@ -83,7 +86,7 @@ main {
 }
 
 #drawing-flex-container .drawing {
-  z-index: -10; /* Required so that the drawings do not block user interaction with buttons */
+  z-index: -9;
 }
 
 .drawing {
@@ -205,7 +208,7 @@ main {
 }
 
 #titleImage.visible {
-  z-index: 100;
+  z-index: 9;
   opacity: 1;
 }
 
@@ -239,7 +242,7 @@ main {
 }
 
 #reminder-grid-container {
-  z-index: 5;
+  z-index: 1;
   width: 100%;
   height: 60%;
   position: absolute;
@@ -297,8 +300,6 @@ main {
   grid-template-rows: 2fr 3fr;
   justify-items: center;
   align-items: start;
-
-  z-index: 9;
 }
 
 #titleImage {
@@ -309,7 +310,7 @@ main {
 }
 
 #audio-container {
-  z-index: 8;
+  z-index: 5;
   grid-row: 2 / -1;
   grid-column: 1 / -1;
 
@@ -329,8 +330,7 @@ main {
 
 #settings {
   position: absolute;
-  right: 1rem;
-  top: 1rem;
+  z-index: 10;
   background-color: rgba(102, 43, 20, 0);
   padding: 0;
   border: 0;
