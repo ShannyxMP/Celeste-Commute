@@ -75,21 +75,21 @@ const reminders = [
   "Keep going!",
   "One step at a time.",
   "You've come so far.",
-  "You’re doing great!",
-  "You’re stronger than you think.",
+  "You're doing great!",
+  "You're stronger than you think.",
   "Every little bit counts.",
   "Be kind to yourself.",
 
   // 🌙 Calming & Supportive
   "Take a deep breath.",
-  "It’s okay to slow down.",
+  "It's okay to slow down.",
   "Rest is productive.",
   "You deserve peace.",
   "Let the calm in.",
 
   // 💪 Motivational
   "Stay curious.",
-  "You’re making progress.",
+  "You're making progress.",
   "Tiny wins are still wins.",
   "Keep showing up.",
   "Believe in your pace.",
@@ -102,7 +102,7 @@ const reminders = [
   "Even clouds make way for sunshine.",
 ];
 
-// Update kind reminder every 10minutes
+// Update kind reminder every 5minutes
 function postKindReminder() {
   if (!audio.paused) {
     const reminderBox = document.querySelector("#reminder-text");
@@ -135,7 +135,7 @@ function postKindReminder() {
     }
   }
 }
-setInterval(postKindReminder, 5000); // (1st) Interval set to 10minutes
+setInterval(postKindReminder, 300000); // (1st) Interval set to 5minutes
 
 // ********** TIME CONFIGURATION SECTION **********
 // To get current date and time:
@@ -151,10 +151,10 @@ function getCurrentDateAndTime() {
   hour = hour % 12 || 12; // <-- If the result of hour % 12 is 0, then use 12
 
   // Get current date:
-  let month = now.getMonth() + 1;
+  let month = now.getMonth() + 1; // <- +1 as .getMonth() begins with 0
   let dayNum = now.getDate();
 
-  // Convert to string and ensure string has at least two characters, if not, it will add "0"
+  // Convert to string and ensure string has at least two characters, if not, it will add 0
   hour = hour.toString().padStart(2, "0"); // Output eg.: "04"
   minute = minute.toString().padStart(2, "0");
   month = month.toString().padStart(2, "0");
