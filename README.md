@@ -56,7 +56,7 @@ To run this project locally:
 
 This project was a capstone project for a full-stack web development course, focused on integrating APIs. I used an API that streams soundtracks from various _Animal Crossing_ games. Data handling between the client and the server remains a challenge for me, but this has been one of my favourite projects so far.
 
-The project initially fetched soundtracks based on the current hour. As I added more features—such as automatically updating the soundtrack when the hour changed—conflicts arose. Specifically, when a user selected a specific time (and thus a specific soundtrack), the auto-polling feature would override the selection every 30 seconds. To resolve this, I moved away from tracking input using global booleans and used URL flags instead.
+The project initially fetched soundtracks based on the current hour. As I added more features - such as automatically updating the soundtrack when the hour changed - conflicts arose. Specifically, when a user selected a specific time (and thus a specific soundtrack), the auto-polling feature would override the selection every 30 seconds. To resolve this, I moved away from tracking input using global booleans and used URL flags instead.
 
 Here is how I handled it on the server:
 
@@ -98,6 +98,8 @@ Animating elements based on my own drawings made this one of the most enjoyable 
 
 I also plan to practice working with more complex API routes. For this project specifically, I would love to add a feature that allows users to choose soundtracks from different _Animal Crossing_ games.
 
+UPDATE: It is now possible for users to choose the Animal Crossing game they would like to listen to.
+
 ### Useful resources
 
 - [Creating a Custom Audio Player](https://css-tricks.com/lets-create-a-custom-audio-player/) I have not implemented this yet, but it offers great tips I hope to follow when replacing the default browser player with a custom one.
@@ -118,7 +120,9 @@ I also plan to practice working with more complex API routes. For this project s
 
 - [ ] Customise audio player to match the theme
 - [x] Allow users to select which game’s soundtrack to listen to
-- [ ] Refine layout
+- [x] Refine layout
 - [ ] Expand animations
-- [ ] Post kind reminders
-- [x] Add a digital clock
+- [x] Post kind reminders
+- [x] Add a digital clock with local time
+- [x] Add local date
+- [ ] Store user-specific settings (like game/time) using sessions or query params - so multiple users don’t override each other’s soundtrack settings
